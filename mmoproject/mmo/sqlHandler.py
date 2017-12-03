@@ -10,16 +10,14 @@ cursor = cnx.cursor()
 
 class Account():
     def __init__(self, accountInfo):
-        self.id = accountInfo[0]
-        self.firstName = accountInfo[1]
-        self.lastName = accountInfo[2]
-        self.email = accountInfo[3]
-        self.password = accountInfo[4]
+        self.userName = accountInfo[0]
+        self.email = accountInfo[1]
+        self.password = accountInfo[2]
 
 
 # Player related queries
 def findAccount(account):
-    search_query = (f"SELECT * FROM player WHERE PlayerFirstName = '{account}'")
+    search_query = (f"SELECT * FROM player_account WHERE userName = '{account}'")
     cursor.execute(search_query)
     result = cursor.fetchone()
     if result:
@@ -29,7 +27,7 @@ def findAccount(account):
 
 
 def findAccountLike(account) -> List[Account]:
-    search_query = (f"SELECT * FROM player WHERE PlayerFirstName LIKE '%{account}%'")
+    search_query = (f"SELECT * FROM player_account WHERE userName LIKE '%{account}%'")
     cursor.execute(search_query)
     queryResults = cursor.fetchall()
     accounts = []
@@ -51,13 +49,13 @@ def findCharacter(characterName):
 
 
 # make_friend related queries
-def getFriendList(friendName) -> List[Account]:
-    search_query = f"SELECT Username1 FROM make_friend WHERE Username2 = '{friendName}' UNION SELECT Username2 FROM make_friend WHERE Username1 = '{friendName}'"
+def getFriendList(user) -> List[Account]:
+    search_query = f"SELECT Username1 FROM make_friend WHERE Username2 = '{user}' UNION SELECT Username2 FROM make_friend WHERE Username1 = '{user}'"
     cursor.execute(search_query)
     queryResults = cursor.fetchall()
     friends = []
     for record in queryResults:
-        friends.append(findCharacter(record[0]))
+        friends.append(findAccount(record[0]))
 
     return friends
 

@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search Result</title>
-</head>
+<html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -23,12 +19,17 @@
         </ul>
     </div>
 
-    <h3>Search Results</h3>
-    {% for result in results %}
-        <a href="{% url 'user' name=result.userName%}">{{ result.userName }}</a>
-    {% empty %}
-        <p>No Result for </p>
-    {% endfor %}
+    <div style="margin-top: 100px" class="jumbotron">
+      <h1 class="display-3" style="margin-left:350px ">Welcome to CompanionApp</h1>
+      <p class="lead"></p>
+      <hr class="my-4">
+      <p style="margin-left:400px ">Search,players,characters,teams and classes from your favorite games.</p>
+    </div>
 
+     <form action="/mmo/" method="post">
+            {% csrf_token %}
+            {{ search_form }}
+            <input type="Submit" value="Search">
+     </form>
 </body>
 </html>

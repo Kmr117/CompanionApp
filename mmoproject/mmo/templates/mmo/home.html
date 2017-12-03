@@ -4,14 +4,30 @@
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
+    <div class = "jumbotron">
+        <ul class="nav nav-pills" style = "padding-left:50px">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">Player</a></li>
+            <li role="presentation"><a href="#">Character</a></li>
+            <li role="presentation"><a href="#">Guilds</a></li>
+            <li role="presentation"><a href="#">Items</a></li>
+            <li role="presentation"><a href="#">Teams</a></li>
+        </ul>
+    </div>
 
-    <h3>Home:</h3>
-
-    <form action="/mmo/" method="post">
-        {% csrf_token %}
-        {{ search_form }}
-        <input type="Submit" value="Search">
-    </form>
+    <div style="margin-top: 100px" class="jumbotron">
+      <h1 class="display-3" style="margin-left:350px ">Welcome to CompanionApp</h1>
+      <p class="lead"></p>
+      <hr class="my-4">
+      <p style="margin-left:400px ">Search,players,characters,teams and classes from your favorite games.</p>
+    </div>
 </body>
 </html>
