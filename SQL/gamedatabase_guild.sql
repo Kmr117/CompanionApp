@@ -18,7 +18,7 @@
 --
 -- Dumping data for table `guild`
 --
-
+use `gamedatabase`;
 LOCK TABLES `guild` WRITE;
 /*!40000 ALTER TABLE `guild` DISABLE KEYS */;
 INSERT INTO `guild` VALUES (1,'TeamIronMan',1,3,'Morgan Freeman'),(2,'TeamCapA',2,5,'CaptainA');
