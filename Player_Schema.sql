@@ -50,7 +50,6 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `gamedatabase`.`guild` (
   `idGuild` INT(11) NOT NULL,
   `GuildName` VARCHAR(45) NOT NULL,
-  `Manager` VARCHAR(45) NOT NULL,
   `GuildLevel` INT(11) NOT NULL,
   `Size` INT(11) NOT NULL,
   `Leader` VARCHAR(45) NOT NULL,
