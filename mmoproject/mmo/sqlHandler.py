@@ -14,6 +14,13 @@ class Account():
         self.email = accountInfo[1]
         self.password = accountInfo[2]
 
+class Character():
+    def __init__(self, charInfo):
+        self.id = charInfo[0]
+        self.name = charInfo[1]
+        self.charClass = charInfo[2]
+        self.attribute = charInfo[3]
+        self.alliance = charInfo[4]
 
 # Player related queries
 def findAccount(account):
@@ -39,11 +46,11 @@ def findAccountLike(account) -> List[Account]:
 
 # Character related queries
 def findCharacter(characterName):
-    search_query = f"SELECT * FROM character WHERE nameCharacter = '{characterName}'"
+    search_query = f"SELECT * FROM `character` WHERE nameCharacter = '{characterName}'"
     cursor.execute(search_query)
     result = cursor.fetchone()
     if result:
-        return Account(result)
+        return Character(result)
     else:
         return None
 

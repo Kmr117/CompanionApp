@@ -15,26 +15,54 @@
     <div class = "jumbotron">
         <ul class="nav nav-pills" style = "padding-left:50px">
             <li role="presentation"><a href={% url 'home' %}>Home</a></li>
-            <li role="presentation"><a href="#">Player</a></li>
-            <li role="presentation" class="active"><a href="#">Character</a></li>
+            <li role="presentation" class="actve"><a href={% url 'user' %}>Player</a></li>
+            <li role="presentation"><a href="#">Character</a></li>
             <li role="presentation"><a href="#">Guilds</a></li>
             <li role="presentation"><a href="#">Items</a></li>
             <li role="presentation"><a href="#">Teams</a></li>
         </ul>
     </div>
 
-    <h3>User Page</h3>
-     <form action='/mmo/user' method="post">
-        {% csrf_token %}
-        {{ search_form }}
-        <input type="Submit" value="Search">
-    </form>
 
     {% if account %}
-    <p>Name: {{ account.userName}}</p>
-    <p>Email: {{ account.email }}</p>
+        <p>Name: {{ account.userName}}</p>
+        <p>Email: {{ account.email }}</p>
     {% endif %}
 
+    <div style="margin-top: 100px" class="jumbotron">
+      <h1 class="display-3" style="margin-left:460px ">Search for Player</h1>
+      <p class="lead"></p>
+      <hr class="my-4">
+      <p style="margin-left:600px ">Enter Player Information</p>
+      <p class="lead">
+        <form>
+          <div class="container">
+              <form method="post" role = "form">
+                {% csrf_token %}
+                {{ search_form }}
+                <input type="Submit" class="btn btn-primary"value="Search">
+              </form>
+            <form role="form">
+                <div class="row">
+                    <div style = "margin-left:500px"  class="form-group col-lg-1">
+                        <label  for="code">Name</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+
+{#                <div class="row">#}
+{#                    <div  style = "margin-left:500px" class="form-group col-lg-1 ">#}
+{#                        <label for="code">Email</label>#}
+{#                        <input type="text" class="form-control input-normal" />#}
+{#                    </div>#}
+{#                </div>#}
+                <div class="row">
+                    <button style = "margin-left:520px" type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+          </div>
+        </form>
+    </div>
 
 </body>
 </html>

@@ -53,5 +53,5 @@ def usearch_result(request, target):
 
 def character(request, charName):
     char = sql.findCharacter(charName)
+    return render(request, 'mmo/character.html', context={'character': char, 'target': charName})
 
-    return render(request, 'mmo/character.html', context={})

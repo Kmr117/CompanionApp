@@ -22,9 +22,14 @@
             <li role="presentation"><a href="#">Teams</a></li>
         </ul>
     </div>
-    <p>Name: </p>
-    <p>Class: </p>
-    <p>Attribute: </p>
-    <p>Alliance: </p>
+    {% if character %}
+        <p>Name: {{ character.name }}</p>
+        <p>Class: {{ character.charClass }}</p>
+        <p>Attribute: {{ character.attribute }}</p>
+        <p>Alliance: {{ character.alliance }}</p>
+    {% else %}
+        <h3>Character '{{ target }}' does not Exist</h3>
+    {%  endif %}
+
 </body>
 </html>
