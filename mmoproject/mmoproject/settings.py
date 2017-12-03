@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'mmoproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mmoproject',
+        'NAME': 'gamedatabase',
         'USER': 'root',
-        'PASSWORD': 'CognitioOccultum0',
+        'PASSWORD': 'gdbpass',
         'HOST': 'localhost',
         'PORT': '3306',
     }

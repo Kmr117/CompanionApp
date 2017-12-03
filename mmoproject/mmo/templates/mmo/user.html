@@ -8,7 +8,7 @@
     <h3>User Page</h3>
     <h4><a href="{% url 'home' %}">Home</a></h4>
 
-    <p>{{ account.uname }}</p>
-    <p>{{ account.email }}</p>
+    <p>Name: {{ account.firstName}} {{ account.lastName }}</p>
+    <p>Email: {{ account.email }}</p>
 </body>
 </html>

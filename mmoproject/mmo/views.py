@@ -23,15 +23,17 @@ def home(request):
     else:
         search_form = SearchUserForm()
 
-    return render(request, 'mmo/home.html', {'search_form': search_form})
+    return render(request, 'mmo/home.html', context={'search_form': search_form})
 
 def user(request, name):
     account = sql.findAccount(name)
-    #account = PlayerAccount.objects.filter(uName=name).get()
-    return render(request, 'mmo/user.html', {'account': account})
+    return render(request, 'mmo/user.html', context={'account': account})
 
 def usearch_result(request, target):
     results = sql.findAccountLike(target)
 
-    # results = PlayerAccount.objects.filter(uName__contains=target)
-    return render(request, 'mmo/usearch_result.html', {'results': results})
+    return render(request, 'mmo/usearch_result.html', context={'results': results, 'target':target})
+
+def character(request, charName):
+
+    return render(request, 'mmo/character.html', context={})

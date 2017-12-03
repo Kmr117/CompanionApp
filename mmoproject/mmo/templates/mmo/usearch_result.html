@@ -6,9 +6,10 @@
 </head>
 <body>
     <h3>Search Results</h3>
-
-    {% for result in results %}
-        <a href="{% url 'user' name=result.uname%}">{{ result.uname }}</a>
+    {% for result in len(results) %}
+        <a href="{% url 'user' name=result.firstName%}">{{ result.firstName }}</a>
+    {% empty %}
+        <p>No Result for </p>
     {% endfor %}
 
 </body>
