@@ -2,9 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Character Info</title>
 </head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
+    <div class = "jumbotron">
+        <ul class="nav nav-pills" style = "padding-left:50px">
+            <li role="presentation"><a href={% url 'home' %}>Home</a></li>
+            <li role="presentation"><a href="#">Player</a></li>
+            <li role="presentation" class="active"><a href="#">Character</a></li>
+            <li role="presentation"><a href="#">Guilds</a></li>
+            <li role="presentation"><a href="#">Items</a></li>
+            <li role="presentation"><a href="#">Teams</a></li>
+        </ul>
+    </div>
+    {% if character %}
+        <p>Name: {{ character.name }}</p>
+        <p>Class: {{ character.charClass }}</p>
+        <p>Attribute: {{ character.attribute }}</p>
+        <p>Alliance: {{ character.alliance }}</p>
+    {% else %}
+        <h3>Character '{{ target }}' does not Exist</h3>
+    {%  endif %}
 
 </body>
 </html>

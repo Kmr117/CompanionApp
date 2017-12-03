@@ -18,7 +18,7 @@
 --
 -- Dumping data for table `item`
 --
-
+use `gamedatabase`;
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
 INSERT INTO `item` VALUES (0,'Gun','Blaster','BigExplosion',120,'Machine'),(1,'Sword','Thick','Decapitate',220,'Metal'),(2,'Staff','Thin','Bolt',201,'Metal');

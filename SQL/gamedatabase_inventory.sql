@@ -18,7 +18,7 @@
 --
 -- Dumping data for table `inventory`
 --
-
+use `gamedatabase`;
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
 INSERT INTO `inventory` VALUES (0,5),(1,4),(2,39),(3,32),(4,21);

@@ -18,7 +18,7 @@
 --
 -- Dumping data for table `character`
 --
-
+USE `gamedatabase`;
 LOCK TABLES `character` WRITE;
 /*!40000 ALTER TABLE `character` DISABLE KEYS */;
 INSERT INTO `character` VALUES (1,'IronMan','Iron','Fighter','Avengers'),(2,'Spiderman','Spider','WebShooter','Averngers'),(3,'CaptainA','Captain','Shield','Avengers'),(4,'Hulk','PissedOff','BigMonster','Avengers'),(5,'djsdf','sds','dfdf','dsdsd');
