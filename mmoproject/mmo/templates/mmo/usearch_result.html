@@ -8,7 +8,7 @@
     <h3>Search Results</h3>
 
     {% for result in results %}
-        <a href="{% url 'user' name=result.uName %}">{{ result.uName }}</a>
+        <a href="{% url 'user' name=result.uname%}">{{ result.uname }}</a>
     {% endfor %}
 
 </body>

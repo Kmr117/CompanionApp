@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import PlayerAccount
 from .forms import SearchUserForm
 from django.http import HttpResponseRedirect
+from . import sqlHandler as sql
 # Create your views here.
 
 
@@ -15,7 +16,7 @@ def home(request):
 
             #redirect to the user's page if the name matches an account in the database;
             #redirect to search results otherwise
-            if(PlayerAccount.objects.filter(uName=acc_name)):
+            if sql.findAccount(acc_name):
                 return HttpResponseRedirect('/mmo/user/{}'.format(acc_name))
             else:
                 return HttpResponseRedirect('/mmo/usearch_result/{}'.format(acc_name))
@@ -25,10 +26,12 @@ def home(request):
     return render(request, 'mmo/home.html', {'search_form': search_form})
 
 def user(request, name):
-    account = PlayerAccount.objects.filter(uName=name).get()
+    account = sql.findAccount(name)
+    #account = PlayerAccount.objects.filter(uName=name).get()
     return render(request, 'mmo/user.html', {'account': account})
 
-
 def usearch_result(request, target):
-    results = PlayerAccount.objects.filter(uName__contains=target)
-    return render(request, 'mmo/usearch_result.html', {'results':results})
+    results = sql.findAccountLike(target)
+
+    # results = PlayerAccount.objects.filter(uName__contains=target)
+    return render(request, 'mmo/usearch_result.html', {'results': results})
