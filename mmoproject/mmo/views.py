@@ -8,11 +8,11 @@ from . import sqlHandler as sql
 
 
 def home(request):
-    # if request.method == 'POST':
-    #     search_form = SearchUserForm(request.POST)
-    #     if search_form.is_valid():
-    #         #Get username to search for from form
-    #         acc_name = search_form.cleaned_data['account_name']
+     #if request.method == 'POST':
+      #   search_form = SearchUserForm(request.POST)
+       #  if search_form.is_valid():
+        #     Get username to search for from form
+         #    acc_name = search_form.cleaned_data['account_name']
     #
     #         #redirect to the user's page if the name matches an account in the database;
     #         #redirect to search results otherwise
@@ -25,33 +25,55 @@ def home(request):
 
     return render(request, 'mmo/home.html')
 
-def user(request, *name):
+def user(request):
+    print (request)
     if request.method == 'POST':
-        search_form = SearchUserForm(request.POST)
-        if search_form.is_valid():
+        name = request.POST["user"]
+        post_name = request.POST["addUser"]
+        if name:
+        #search_form = SearchUserForm(request.POST["user"])
+        #if search_form.is_valid():
             # Get username to search for from form
-            acc_name = search_form.cleaned_data['account_name']
+            acc_name = name#search_form.cleaned_data['account_name']
 
-            # redirect to the user's page if the name matches an account in the database;
+            # redirect to the user's page if the name matches an account in the database;#
             # redirect to search results otherwise
-            if sql.findAccount(acc_name):
-                return HttpResponseRedirect('/mmo/user/{}'.format(acc_name))
+            player = sql.findAccount(acc_name)
+            if player is not None:
+                return render(request,'mmo/user.html',context = {"account":player})
+
+            #return HttpResponseRedirect('/mmo/user/{}'.format(acc_name))
             else:
                 return HttpResponseRedirect('/mmo/usearch_result/{}'.format(acc_name))
     else:
-        search_form = SearchUserForm()
-        if not name:
-            account = sql.findAccount(name)
-            return render(request, 'mmo/user.html', context={'account': account, 'search_form': search_form})
-        else:
-            return render(request, 'mmo/user.html', context={'account': None, 'search_form': search_form})
+        return render(request, 'mmo/user.html', context={'account': None})
+
+    #else:
+     #   print("hello")
+      #  search_form = SearchUserForm()
+       # if not name:
+        #    account = sql.findAccount(name)
+         #   return render(request, 'mmo/user.html', context={'account': account, 'search_form': search_form})
+
+
 
 def usearch_result(request, target):
     results = sql.findAccountLike(target)
 
     return render(request, 'mmo/usearch_result.html', context={'results': results, 'target': target})
 
-def character(request, charName):
-    char = sql.findCharacter(charName)
-    return render(request, 'mmo/character.html', context={'character': char, 'target': charName})
+def character(request):
+    if request.method == 'POST':
+        print("hello")
+    #char = sql.findCharacter(charName)
+    return render(request, 'mmo/character.html',) #context={'character': char, 'target': charName})
+
+def character1(request):
+    char = None
+    if request.method =='POST':
+        print("hello")
+        charName = request.POST["name"]
+        char = sql.findCharacter(charName)
+        print (char)
+    return render(request,'mmo/character.html' ,context = {"character":char})
 

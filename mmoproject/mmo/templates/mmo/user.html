@@ -15,11 +15,9 @@
     <div class = "jumbotron">
         <ul class="nav nav-pills" style = "padding-left:50px">
             <li role="presentation"><a href={% url 'home' %}>Home</a></li>
-            <li role="presentation" class="actve"><a href={% url 'user' %}>Player</a></li>
-            <li role="presentation"><a href="#">Character</a></li>
-            <li role="presentation"><a href="#">Guilds</a></li>
+            <li role="presentation" class="active"><a href={% url 'user' %}>Player</a></li>
+            <li role="presentation"><a href={% url 'character1' %}>Character</a></li>
             <li role="presentation"><a href="#">Items</a></li>
-            <li role="presentation"><a href="#">Teams</a></li>
         </ul>
     </div>
 
@@ -29,15 +27,24 @@
       <hr class="my-4">
       <p style="margin-left:600px ">Enter Player Information</p>
       <p class="lead">
-        <form>
+
           <div class="container">
-              <form action='user' method="post" role = "form">
+              <form action="" method="post" role = "form">
                 {% csrf_token %}
-                {{ search_form }}
-                <input type="Submit" class="btn btn-primary"value="Search">
+                  <input type="text" class="form-control" name ='user'/>
+                <input type="Submit" class="btn btn-primary" value="Search">
               </form>
           </div>
-        </form>
+
+
+         <div class="container">
+              <form action="" method="post" role = "form">
+                {% csrf_token %}
+                  <input type="text" class="form-control" name ='addUser'/>
+                <input type="Submit" class="btn btn-primary" value="Search">
+              </form>
+          </div>
+
     </div>
 
     {% if account %}
