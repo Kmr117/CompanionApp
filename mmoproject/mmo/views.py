@@ -34,7 +34,7 @@ def user(request, *name):
 
             # redirect to the user's page if the name matches an account in the database;
             # redirect to search results otherwise
-            if sql.findAccount(acc_name) is not None:
+            if sql.findAccount(acc_name):
                 return HttpResponseRedirect('/mmo/user/{}'.format(acc_name))
             else:
                 return HttpResponseRedirect('/mmo/usearch_result/{}'.format(acc_name))
