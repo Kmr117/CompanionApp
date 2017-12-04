@@ -14,14 +14,31 @@
 <body>
     <div class = "jumbotron">
         <ul class="nav nav-pills" style = "padding-left:50px">
+
             <li role="presentation"><a href={% url 'home' %}>Home</a></li>
-            <li role="presentation"><a href="#">Player</a></li>
-            <li role="presentation" class="active"><a href="#">Character</a></li>
-            <li role="presentation"><a href="#">Guilds</a></li>
+            <li role="presentation" ><a href={% url 'user' %}>Player</a></li>
+            <li role="presentation"class="active"><a href={% url 'character1' %}>Character</a></li>
             <li role="presentation"><a href="#">Items</a></li>
-            <li role="presentation"><a href="#">Teams</a></li>
+
+          
         </ul>
     </div>
+
+
+          <form action='' method="post" role ="form">
+
+                {% csrf_token %}
+                {{ search_form }}
+
+                <div class="row">
+                    <div style = "margin-left:500px"  class="form-group col-lg-1">
+                        <label  for="code">Name</label>
+                        <input type="text" class="form-control" name = 'name' />
+                        <input type="Submit" class="btn btn-primary"value="Search">
+                    </div>
+                </div>
+          </form>
+   <div> 
     {% if character %}
         <p>Name: {{ character.name }}</p>
         <p>Class: {{ character.charClass }}</p>
@@ -30,6 +47,7 @@
     {% else %}
         <h3>Character '{{ target }}' does not Exist</h3>
     {%  endif %}
+</div>
 
 </body>
 </html>
