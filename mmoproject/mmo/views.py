@@ -29,7 +29,6 @@ def user(request):
     print (request)
     if request.method == 'POST':
         name = request.POST["user"]
-        post_name = request.POST["addUser"]
         if name:
         #search_form = SearchUserForm(request.POST["user"])
         #if search_form.is_valid():
@@ -55,7 +54,13 @@ def user(request):
         #    account = sql.findAccount(name)
          #   return render(request, 'mmo/user.html', context={'account': account, 'search_form': search_form})
 
-
+def addUser(request):
+    if request.method == 'POST':
+        username = request.POST["addUserName"]
+        email = request.POST["addUserEmail"]
+        password = request.POST["addUserPassword"]
+        sql.CreateAccount(username=username,email=email,password=password)
+    return render(request,'mmo/user.html')
 
 def usearch_result(request, target):
     results = sql.findAccountLike(target)
@@ -74,6 +79,17 @@ def character1(request):
         print("hello")
         charName = request.POST["name"]
         char = sql.findCharacter(charName)
-        print (char)
-    return render(request,'mmo/character.html' ,context = {"character":char})
+        return render(request,'mmo/character.html' ,context = {"character":char})
 
+    return render(request,'mmo/character.html',)
+
+def character2(request):
+    items = None
+    if request.method =='POST':
+        name = request.POST["inventory"]
+        items = sql.findItems(name)
+        print("this is ")
+        print(items)
+        return render(request, 'mmo/character.html', context={"inventory":items})
+
+    #return render(request,'mmo/character.html',)
