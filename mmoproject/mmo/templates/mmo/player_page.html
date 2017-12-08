@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Character Info</title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body style="color:#5DADE2">
+    <div  class = "jumbotron">
+        <ul class="nav nav-pills" style = "padding-left:50px">
+
+            <li role="presentation"><a href={% url 'home' %}>Home</a></li>
+            <li role="presentation" ><a href={% url 'user' %}>Player</a></li>
+            <li role="presentation"><a href={% url 'character1' %}>Character></a></li>
+            <li role="presentation"><a href="#">Items</a></li>
+
+
+        </ul>
+    </div>
+
+
+    <div style="margin-top: 100px" class="jumbotron">
+      <h1 class="display-3" style="margin-left:460px ">Welcome to {{player_id}} 's page </h1>
+      <p class="lead"></p>
+      <hr class="my-4">
+      <p style="margin-left:600px ">Player  Information</p>
+      <p class="lead">
+
+    <div class="container">
+        <o>{{player}}</o>
+         <o>{{}}</o>
+         <o>{{}}</o>
+          </div>
+
+
+         <div class="container">
+              <form action="items/" method="post" role = "form">
+                {% csrf_token %}
+                  <input  type="text" class="form-control" name ='inventory'/>
+                <input style="margin-left:50%" type="Submit" class="btn btn-primary" value="Search">
+              </form>
+          </div>
+
+
+   <div>
+    {% if character %}
+        <p>Name: {{ character.name }}</p>
+        <p>Class: {{ character.charClass }}</p>
+        <p>Attribute: {{ character.attribute }}</p>
+        <p>Alliance: {{ character.alliance }}</p>
+
+    {%  endif %}
+</div>
+
+        <div>
+        {% if inventory %}
+            <p>            Character Name   Item Name  Quantity</p>
+            {% for item in inventory%}
+            <p>{{item}}</p>
+            {%empty%}
+            <p> no resulkt</p>
+            {%endfor%}
+
+        {% endif %}
+
+
+        </div>
+
+
+</body>
+</html>
