@@ -4,7 +4,7 @@ from typing import List
 from django.db import models
 
 # Initialize MySQL Database connection and cursor
-cnx = connection.MySQLConnection(user='root', password='Tarun123', host='localhost', database='gamedatabase')
+cnx = connection.MySQLConnection(user='root', password='gdbpass', host='localhost', database='gamedatabase')
 cursor = cnx.cursor()
 
 

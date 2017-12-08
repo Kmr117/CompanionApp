@@ -1,9 +1,8 @@
-from operator import concat
 from django.shortcuts import render
-from .models import PlayerAccount
 from .forms import SearchUserForm
 from django.http import HttpResponseRedirect
 from . import sqlHandler as sql
+from django.views import View
 # Create your views here.
 
 
@@ -93,3 +92,25 @@ def character2(request):
         return render(request, 'mmo/character.html', context={"inventory":items})
 
     #return render(request,'mmo/character.html',)
+
+class userView(View):
+    def get(self, request, name=''):
+        if name == '':
+            return render(request, 'mmo/user.html', context={'account': None})
+        else:
+            account = sql.findAccount(name)
+            return render(request, 'mmo/user.html', context={'account': account})
+
+    def post(self, request):
+        name = request.POST["user"]
+        if name:
+            # search_form = SearchUserForm(request.POST["user"])
+            # if search_form.is_valid():
+
+            # redirect to the user's page if the name matches an account in the database;#
+            # redirect to search results otherwise
+            player = sql.findAccount(name)
+            if player is not None:
+                return render(request, 'mmo/user.html', context={"account": player})
+            else:
+                return HttpResponseRedirect('/mmo/usearch_result/{}'.format(name))

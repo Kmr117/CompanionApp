@@ -38,7 +38,8 @@
 
 
          <div class="container" style="margin-top:50px">
-              <form action="addUser/" method="post" role = "form">
+              <!--<form action="addUser/" method="post" role = "form">-->
+             <form action='' method="post" role="form">
                 {% csrf_token %}
                   <input type="text" class="form-control" name ='addUserName' placeholder="UserName"/>
                   <input type="text" class="form-control" name ='addUserEmail' placeholder="Email"/>
