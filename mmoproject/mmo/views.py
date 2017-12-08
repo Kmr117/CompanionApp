@@ -24,27 +24,27 @@ def home(request):
 
     return render(request, 'mmo/home.html')
 
-def user(request):
-    print (request)
-    if request.method == 'POST':
-        name = request.POST["user"]
-        if name:
-        #search_form = SearchUserForm(request.POST["user"])
-        #if search_form.is_valid():
-            # Get username to search for from form
-            acc_name = name#search_form.cleaned_data['account_name']
-
-            # redirect to the user's page if the name matches an account in the database;#
-            # redirect to search results otherwise
-            player = sql.findAccount(acc_name)
-            if player is not None:
-                return render(request,'mmo/user.html',context = {"account":player})
-
-            #return HttpResponseRedirect('/mmo/user/{}'.format(acc_name))
-            else:
-                return HttpResponseRedirect('/mmo/usearch_result/{}'.format(acc_name))
-    else:
-        return render(request, 'mmo/user.html', context={'account': None})
+# def user(request):
+#     print (request)
+#     if request.method == 'POST':
+#         name = request.POST["user"]
+#         if name:
+#         #search_form = SearchUserForm(request.POST["user"])
+#         #if search_form.is_valid():
+#             # Get username to search for from form
+#             acc_name = name#search_form.cleaned_data['account_name']
+#
+#             # redirect to the user's page if the name matches an account in the database;#
+#             # redirect to search results otherwise
+#             player = sql.findAccount(acc_name)
+#             if player is not None:
+#                 return render(request,'mmo/user.html',context = {"account":player})
+#
+#             #return HttpResponseRedirect('/mmo/user/{}'.format(acc_name))
+#             else:
+#                 return HttpResponseRedirect('/mmo/usearch_result/{}'.format(acc_name))
+#     else:
+#         return render(request, 'mmo/user.html', context={'account': None})
 
     #else:
      #   print("hello")
@@ -92,6 +92,24 @@ def character2(request):
         return render(request, 'mmo/character.html', context={"inventory":items})
 
     #return render(request,'mmo/character.html',)
+class characterView(View):
+    def get(self, request, charName=''):
+        if charName == '':
+            return render(request, 'mmo/character.html', context={'character': None, 'inventory': None})
+        else:
+            character = sql.findCharacter(charName)
+            items = sql.findItems(charName)
+            return render(request, 'mmo/character.html', context={'character': character, 'inventory': items})
+
+    def post(self, request):
+        charName = request.POST['name']
+        if charName:
+            character = sql.findCharacter(charName)
+            if charName is not None:
+                items = sql.findItems(charName)
+                return render(request, 'mmo/character.html', context={'character': character, 'inventory': items})
+
+
 
 class userView(View):
     def get(self, request, name=''):
@@ -104,10 +122,7 @@ class userView(View):
     def post(self, request):
         name = request.POST["user"]
         if name:
-            # search_form = SearchUserForm(request.POST["user"])
-            # if search_form.is_valid():
-
-            # redirect to the user's page if the name matches an account in the database;#
+            # redirect to the user's page if the name matches an account in the database;
             # redirect to search results otherwise
             player = sql.findAccount(name)
             if player is not None:
