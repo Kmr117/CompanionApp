@@ -11,7 +11,7 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<body>
+<body style="color:#5DADE2">
     <div class = "jumbotron">
         <ul class="nav nav-pills" style = "padding-left:50px">
             <li role="presentation"><a href={% url 'home' %}>Home</a></li>
@@ -31,26 +31,28 @@
           <div class="container">
               <form action="" method="post" role = "form">
                 {% csrf_token %}
-                  <input type="text" class="form-control" name ='user'/>
-                <input type="Submit" class="btn btn-primary" value="Search">
+                  <input type="text" class="form-control" name ='user' placeholder="Enter Name"/>
+                <input style="margin-left:50%" type="Submit" class="btn btn-primary" value="Search" >
               </form>
           </div>
 
 
-         <div class="container">
-              <form action="" method="post" role = "form">
+         <div class="container" style="margin-top:50px">
+              <form action="addUser/" method="post" role = "form">
                 {% csrf_token %}
-                  <input type="text" class="form-control" name ='addUser'/>
-                <input type="Submit" class="btn btn-primary" value="Search">
+                  <input type="text" class="form-control" name ='addUserName' placeholder="UserName"/>
+                  <input type="text" class="form-control" name ='addUserEmail' placeholder="Email"/>
+                  <input type="text" class="form-control" name ='addUserPassword' placeholder="Password"/>
+                <input  style="margin-left:50%" type="Submit" class="btn btn-primary" value="Submit">
               </form>
           </div>
-
-    </div>
-
-    {% if account %}
+        {% if account %}
         <p>Name: {{ account.userName}}</p>
         <p>Email: {{ account.email }}</p>
     {% endif %}
+    </div>
+
+
 
 </body>
 </html>
