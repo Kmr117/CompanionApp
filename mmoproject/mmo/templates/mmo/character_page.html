@@ -1,0 +1,54 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body style="color:#5DADE2">
+    <div  class = "jumbotron">
+        <ul class="nav nav-pills" style = "padding-left:50px">
+
+            <li role="presentation"><a href={% url 'home' %}>Home</a></li>
+            <li role="presentation" ><a href={% url 'user' %}>Player</a></li>
+            <li role="presentation"><a href={% url 'character1' %}>Character</a></li>
+            <li role="presentation"><a href="#">Items</a></li>
+
+
+        </ul>
+    </div>
+
+
+    <div style="margin-top: 100px" class="jumbotron">
+      <h1 class="display-3" style="margin-left:460px ">Welcome to {{character.name}}'s Page</h1>
+      <p class="lead"></p>
+      <hr class="my-4">
+      <p style="margin-left:600px ">Character Information</p>
+      <p class="lead">
+
+    <div class="container">
+        <p class="lead">{{character.name}}</p>
+        <p class="lead">{{character.alliance}}</p>
+        
+
+
+          </div>
+
+
+        <div class="container">
+
+
+          </div>
+
+
+   <div>
+    {% if skill %}
+       {%for each in skill%}
+        <p>Name: {{ each.name }}</p>
+        <p>Class: {{ each.DamageType}}</p>
+        <p>Attribute: {{ each.levelRequired}}</p>
+
+    {%  endif %}
+</div>
+
+
+
+
+</body>

@@ -55,6 +55,16 @@
         {% endif %}
     </div>
 
+<div class="jumbotron">
+    <p>Friends List</p>
+    {%if friends%}
+    {%for each in friend%}
+        <a href="link to player page">each.name</a>
+    {%endfor%}
+    {%endif%}
+
+</div>
+
 
 
 </body>
