@@ -22,7 +22,7 @@ class Character():
         self.attribute = charInfo[3]
         self.alliance = charInfo[4]
         self.BelongTo=charInfo[5]
-        #self.Guild=charInfo[6]
+        self.Level=charInfo[6]
 
 
 class Event():
@@ -237,10 +237,13 @@ def moveItem(fromBag, toBag,itemID):# take id of  bags and id of the item
     query= cursor.fetchone()
     if query:#toBag has the item
         cursor.execute(update_query_has_item_inToBag)
+        cnx.commit()
         cursor.execute(remove_Item_query)
+        cnx.commit()
 
     else:
         cursor.execute(update_query_no_item_inToBag)
+        cnx.commit()
 
 
 def getALLBag(UserName): #input username of accout return 2d array  [[all bag ID of 1st character],[all bag ID of 2nd character]......]
