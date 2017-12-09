@@ -1,0 +1,2 @@
+# 341Project
+Databases are a vital part of MMORPG(Massive multiplayer online role play games. Eg. World of Warcraft, black desert...etc), especially when data is constantly accessed and updated while a player is playing. This application is designed to help players manage their accounts, characters, and inventories through a web app. By designing the database and creating the view for the database, the application can retrieve the most used data for the game efficiently and effectively for the companion application.
