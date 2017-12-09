@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body style="color:#5DADE2">
+    <div  class = "jumbotron">
+        <ul class="nav nav-pills" style = "padding-left:50px">
+            <li role="presentation"><a href={% url 'home' %}>Home</a></li>
+            <li role="presentation" class="active"><a href={% url 'user' %}>Player</a></li>
+            <li role="presentation"><a href={% url 'character' %}>Character</a></li>
+        </ul>
+    </div>
+
+
+    <div style="margin-top: 100px" class="jumbotron">
+      <h1 class="display-3" style="margin-left:460px ">Welcome to {{player.userName}}'s Page</h1>
+      <p class="lead"></p>
+      <hr class="my-4">
+      <p style="margin-left:600px ">Player Information</p>
+      <p class="lead">
+
+        <div class="container">
+            <p class="lead">Email: {{player.email}}</p>
+            <p>Characters: </p>
+            {% if characters %}
+                {% for c in characters%}
+                <a href='{% url 'characterDetail' c.name %}'>{{c.name}}</a>
+                {%endfor%}
+            {%endif%}
+        </div>
+
+    <div class="jumbotron">
+        <p>Friends List</p>
+        {%if friends%}
+        {%for friend in friends%}
+            <a href='{% url 'userFind' name=friend.userName %}'>{{ friend.userName }}</a>
+        {%endfor%}
+        {%endif%}
+    </div>
+
+</body>
+</html>

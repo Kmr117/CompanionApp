@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>Character Info</title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body style="height:100%">
+    <div class = "jumbotron" style = "height:5%">
+        <ul class="nav nav-pills" style = "padding-left:50px;margin-bottom:50px">
+          <li role="presentation"><a href='{% url 'home' %}'>Home</a></li>
+          <li role="presentation"><a href='{% url 'user' %}'>Player</a></li>
+          <li role="presentation" class="active"><a href='{% url 'character' %}' style="font-weight: bold">Character</a></li>
+        </ul>
+    </div>
+    <div style="margin-top: 100px" class="jumbotron">
+      <h1 class="display-3" style="margin-left:460px ">Character Info</h1>
+      <p class="lead"></p>
+      <hr class="my-4">
+        {% if character %}
+        <p>Name: {{ character.name }}</p>
+        <p>Class: {{ character.charClass }}</p>
+        <p>Attribute: {{ character.attribute }}</p>
+        <p>Alliance: {{ character.alliance }}</p>
+        {%  endif %}
+
+        {% if inventory %}
+            <hr>
+            <h3>Inventory</h3>
+            {% for item in inventory%}
+                <p>Item Name: {{item.itemName}}</p>
+                <p>Category: {{ item.itemCategory }}</p>
+                <p>Quantity: {{ item.quantity }}</p>
+                <p>Description: {{ item.itemDescription }}</p>
+                <br>
+            {%empty%}
+                <p> No Inventory</p>
+            {%endfor%}
+        {% endif %}
+
+
+    </div>
+{#      <p class="lead">#}
+{#        <form>#}
+{#            <div class="container">#}
+{#                <form class="form-inline">#}
+{#                    <div class="form-group">#}
+{#                        <label for="staticEmail2" class="sr-only">Email</label>#}
+{#                        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">#}
+{#                        <button type="submit" class="btn btn-primary">Find Friend</button>#}
+{#                    </div>#}
+{#                </form>#}
+{#                <div class="form-group">#}
+{#                    <label for="staticEmail2" class="sr-only">Email</label>#}
+{#                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">#}
+{#                    <button type="submit" class="btn btn-primary">Add Friend</button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+</body>
+</html>

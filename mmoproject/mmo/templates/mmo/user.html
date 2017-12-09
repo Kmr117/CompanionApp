@@ -48,22 +48,9 @@
             <input  style="margin-left:50%" type="Submit" class="btn btn-primary" value="Submit">
           </form>
       </div>
-
-        {% if account %}
-            <p>Name: {{ account.userName}}</p>
-            <p>Email: {{ account.email }}</p>
-        {% endif %}
     </div>
 
-<div class="jumbotron">
-    <p>Friends List</p>
-    {%if friends%}
-    {%for each in friend%}
-        <a href="link to player page">each.name</a>
-    {%endfor%}
-    {%endif%}
 
-</div>
 
 
 

@@ -7,51 +7,7 @@ from django.views import View
 
 
 def home(request):
-     #if request.method == 'POST':
-      #   search_form = SearchUserForm(request.POST)
-       #  if search_form.is_valid():
-        #     Get username to search for from form
-         #    acc_name = search_form.cleaned_data['account_name']
-    #
-    #         #redirect to the user's page if the name matches an account in the database;
-    #         #redirect to search results otherwise
-    #         if sql.findAccount(acc_name):
-    #             return HttpResponseRedirect('/mmo/user/{}'.format(acc_name))
-    #         else:
-    #             return HttpResponseRedirect('/mmo/usearch_result/{}'.format(acc_name))
-    # else:
-    #     search_form = SearchUserForm()
-
     return render(request, 'mmo/home.html')
-
-# def user(request):
-#     print (request)
-#     if request.method == 'POST':
-#         name = request.POST["user"]
-#         if name:
-#         #search_form = SearchUserForm(request.POST["user"])
-#         #if search_form.is_valid():
-#             # Get username to search for from form
-#             acc_name = name#search_form.cleaned_data['account_name']
-#
-#             # redirect to the user's page if the name matches an account in the database;#
-#             # redirect to search results otherwise
-#             player = sql.findAccount(acc_name)
-#             if player is not None:
-#                 return render(request,'mmo/user.html',context = {"account":player})
-#
-#             #return HttpResponseRedirect('/mmo/user/{}'.format(acc_name))
-#             else:
-#                 return HttpResponseRedirect('/mmo/usearch_result/{}'.format(acc_name))
-#     else:
-#         return render(request, 'mmo/user.html', context={'account': None})
-
-    #else:
-     #   print("hello")
-      #  search_form = SearchUserForm()
-       # if not name:
-        #    account = sql.findAccount(name)
-         #   return render(request, 'mmo/user.html', context={'account': account, 'search_form': search_form})
 
 def addUser(request):
     if request.method == 'POST':
@@ -66,66 +22,51 @@ def usearch_result(request, target):
 
     return render(request, 'mmo/usearch_result.html', context={'results': results, 'target': target})
 
-def character(request):
-    if request.method == 'POST':
-        print("hello")
-    #char = sql.findCharacter(charName)
-    return render(request, 'mmo/character.html',) #context={'character': char, 'target': charName})
+def characterDetail(request, detailTarget):
+    character = sql.findCharacter(detailTarget)
+    items = sql.findItems(detailTarget)
+    return render(request, 'mmo/character_detail.html', context={'character': character, 'inventory':items})
 
-def character1(request):
-    char = None
-    if request.method =='POST':
-        print("hello")
-        charName = request.POST["name"]
-        char = sql.findCharacter(charName)
-        return render(request,'mmo/character.html' ,context = {"character":char})
+def playerDetail(request, name):
+    user = sql.findAccount(name)
+    characters = sql.findAllCharacter(name)
+    friends = sql.getFriendList(name)
+    return render(request, 'mmo/player_detail.html', context={'player': user, 'characters': characters, 'friends': friends})
 
-    return render(request,'mmo/character.html',)
 
-def character2(request):
-    items = None
-    if request.method =='POST':
-        name = request.POST["inventory"]
-        items = sql.findItems(name)
-        print("this is ")
-        print(items)
-        return render(request, 'mmo/character.html', context={"inventory":items})
-
-    #return render(request,'mmo/character.html',)
 class characterView(View):
     def get(self, request, charName=''):
         if charName == '':
             return render(request, 'mmo/character.html', context={'character': None, 'inventory': None})
-        else:
-            character = sql.findCharacter(charName)
-            items = sql.findItems(charName)
-            return render(request, 'mmo/character.html', context={'character': character, 'inventory': items})
 
     def post(self, request):
         charName = request.POST['name']
         if charName:
             character = sql.findCharacter(charName)
-            if charName is not None:
-                items = sql.findItems(charName)
-                return render(request, 'mmo/character.html', context={'character': character, 'inventory': items})
+            if character is not None:
+                return HttpResponseRedirect('/mmo/character/detail/{}'.format(charName))
 
 
 
 class userView(View):
     def get(self, request, name=''):
         if name == '':
-            return render(request, 'mmo/user.html', context={'account': None})
-        else:
-            account = sql.findAccount(name)
-            return render(request, 'mmo/user.html', context={'account': account})
+            return render(request, 'mmo/user.html')
 
     def post(self, request):
-        name = request.POST["user"]
-        if name:
+
+        if 'user' in request.POST:
             # redirect to the user's page if the name matches an account in the database;
             # redirect to search results otherwise
+            name = request.POST['user']
             player = sql.findAccount(name)
             if player is not None:
-                return render(request, 'mmo/user.html', context={"account": player})
+                return HttpResponseRedirect('/mmo/user/detail/{}'.format(player.userName))
             else:
                 return HttpResponseRedirect('/mmo/usearch_result/{}'.format(name))
+        else:
+            newName = request.POST['addUserName']
+            newEmail = request.POST['addUserEmail']
+            newPassword = request.POST['addUserPassword']
+            sql.CreateAccount(newName, newEmail, newPassword)
+            return render(request, 'mmo/user.html')
